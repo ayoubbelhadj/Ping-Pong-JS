@@ -1,12 +1,15 @@
 const cvs = document.getElementById("pong");
 const ctx = cvs.getContext("2d");
+const cadr = document.getElementById("cadre");
 // cvs.style.backgroundColor = "BLACK";
 const hitSound = new Audio('./pong.ogg');
 const ScoreSound = new Audio('./score.ogg')
 var scoreTime = Date.now();
 var currentTime;
-var nis = 1000 / 1000
-
+var nis = cadr.offsetWidth / 1000;
+cvs.width = cadr.offsetWidth;
+cvs.height = 600 * nis;
+console.log(cadr.offsetWidth);
 var win_w = 1000;
 var win_h = 600;
 var scored = 1;
@@ -247,7 +250,7 @@ function ballRestart(){
 	else {
 		ball.speed = 5;
 		ball.speed_X = ball.speed * RandomDir();
-		ball.speed_Y = ball.speed * RandomDir();
+		ball.speed_Y = 0;
 		scoreTime = 0;
 	}
 }
@@ -260,6 +263,9 @@ function drawBackGround(){
 
 
 function game(){
+	nis = cadr.offsetWidth / 1000;
+	cvs.width = cadr.offsetWidth;
+	cvs.height = 600 * nis;
 	currentTime = Date.now();
 	eventCheck();
 	ctx.clearRect(0, 0, win_w, win_h);
